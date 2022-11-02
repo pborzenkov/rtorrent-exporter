@@ -1,0 +1,18 @@
+[package]
+name = "rtorrent-exporter"
+version = "0.1.0"
+authors = ["Pavel Borzenkov <pavel@borzenkov.net>"]
+edition = "2021"
+license = "MIT"
+description = "Prometheus exporter for RTorrent"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+axum = "0"
+clap = { version = "4", features = ["derive"] }
+prometheus-client = "0"
+reqwest = "0"
+rtorrent-xmlrpc-bindings = "1"
+tokio = { version = "1", features = ["full"] }
+tracing-subscriber = { version = "0", features = ["env-filter"] }
