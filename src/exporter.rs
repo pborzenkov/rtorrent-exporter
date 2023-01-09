@@ -12,8 +12,8 @@ pub(crate) fn get_router(registry: Registry) -> Router {
 async fn export(
     Extension(registry): Extension<Arc<Registry>>,
 ) -> axum::response::Result<impl IntoResponse> {
-    let buf = task::spawn_blocking(move || -> std::io::Result<Vec<_>> {
-        let mut buf = Vec::new();
+    let buf = task::spawn_blocking(move || -> Result<String, std::fmt::Error> {
+        let mut buf = String::new();
         encode(&mut buf, &registry)?;
 
         Ok(buf)
