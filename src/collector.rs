@@ -9,7 +9,7 @@ use rtorrent_xmlrpc_bindings::{multicall::d, Server};
 struct DownloadedBytes(Server);
 
 impl EncodeMetric for DownloadedBytes {
-    fn encode(&self, mut encoder: MetricEncoder<'_, '_>) -> std::fmt::Result {
+    fn encode(&self, mut encoder: MetricEncoder<'_>) -> std::fmt::Result {
         encoder.encode_counter::<(), _, u64>(
             &(self.0.down_total().or(Err(std::fmt::Error))? as u64),
             None,
@@ -24,7 +24,7 @@ impl EncodeMetric for DownloadedBytes {
 struct UploadedBytes(Server);
 
 impl EncodeMetric for UploadedBytes {
-    fn encode(&self, mut encoder: MetricEncoder<'_, '_>) -> std::fmt::Result {
+    fn encode(&self, mut encoder: MetricEncoder<'_>) -> std::fmt::Result {
         encoder.encode_counter::<(), _, u64>(
             &(self.0.up_total().or(Err(std::fmt::Error))? as u64),
             None,
@@ -39,7 +39,7 @@ impl EncodeMetric for UploadedBytes {
 struct ActiveTorrents(Server);
 
 impl EncodeMetric for ActiveTorrents {
-    fn encode(&self, mut encoder: MetricEncoder<'_, '_>) -> std::fmt::Result {
+    fn encode(&self, mut encoder: MetricEncoder<'_>) -> std::fmt::Result {
         encoder.encode_gauge(
             &(d::MultiBuilder::new(&self.0, "default")
                 .call(d::IS_ACTIVE)
@@ -61,7 +61,7 @@ impl EncodeMetric for ActiveTorrents {
 struct PausedTorrents(Server);
 
 impl EncodeMetric for PausedTorrents {
-    fn encode(&self, mut encoder: MetricEncoder<'_, '_>) -> std::fmt::Result {
+    fn encode(&self, mut encoder: MetricEncoder<'_>) -> std::fmt::Result {
         encoder.encode_gauge(
             &(d::MultiBuilder::new(&self.0, "default")
                 .call(d::IS_ACTIVE)
@@ -83,7 +83,7 @@ impl EncodeMetric for PausedTorrents {
 struct StoppedTorrents(Server);
 
 impl EncodeMetric for StoppedTorrents {
-    fn encode(&self, mut encoder: MetricEncoder<'_, '_>) -> std::fmt::Result {
+    fn encode(&self, mut encoder: MetricEncoder<'_>) -> std::fmt::Result {
         encoder.encode_gauge(
             &(d::MultiBuilder::new(&self.0, "default")
                 .call(d::STATE)
@@ -103,7 +103,7 @@ impl EncodeMetric for StoppedTorrents {
 struct CompleteTorrents(Server);
 
 impl EncodeMetric for CompleteTorrents {
-    fn encode(&self, mut encoder: MetricEncoder<'_, '_>) -> std::fmt::Result {
+    fn encode(&self, mut encoder: MetricEncoder<'_>) -> std::fmt::Result {
         encoder.encode_gauge(
             &(d::MultiBuilder::new(&self.0, "default")
                 .call(d::COMPLETE)
@@ -123,7 +123,7 @@ impl EncodeMetric for CompleteTorrents {
 struct IncompleteTorrents(Server);
 
 impl EncodeMetric for IncompleteTorrents {
-    fn encode(&self, mut encoder: MetricEncoder<'_, '_>) -> std::fmt::Result {
+    fn encode(&self, mut encoder: MetricEncoder<'_>) -> std::fmt::Result {
         encoder.encode_gauge(
             &(d::MultiBuilder::new(&self.0, "default")
                 .call(d::INCOMPLETE)
@@ -143,7 +143,7 @@ impl EncodeMetric for IncompleteTorrents {
 struct TotalLeftBytes(Server);
 
 impl EncodeMetric for TotalLeftBytes {
-    fn encode(&self, mut encoder: MetricEncoder<'_, '_>) -> std::fmt::Result {
+    fn encode(&self, mut encoder: MetricEncoder<'_>) -> std::fmt::Result {
         encoder.encode_gauge(
             &d::MultiBuilder::new(&self.0, "default")
                 .call(d::LEFT_BYTES)
