@@ -1,5 +1,5 @@
 {
-  description = "koreader-syncd";
+  description = "rtorrent-exporter";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
