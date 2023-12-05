@@ -3,6 +3,7 @@ use prometheus_client::registry::Registry;
 use reqwest::Url;
 use rtorrent_xmlrpc_bindings::Server;
 use std::net::SocketAddr;
+use tokio::net::TcpListener;
 
 mod collector;
 mod exporter;
@@ -39,9 +40,7 @@ async fn main() {
     collector::register_metrics(&mut registry, rtorrent);
 
     let exporter = exporter::get_router(registry);
+    let listener = TcpListener::bind(&args.address).await.unwrap();
 
-    axum::Server::bind(&args.address)
-        .serve(exporter.into_make_service())
-        .await
-        .unwrap();
+    axum::serve(listener, exporter).await.unwrap();
 }
