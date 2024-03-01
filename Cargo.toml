@@ -10,7 +10,7 @@ description = "Prometheus exporter for RTorrent"
 
 [dependencies]
 axum = "0.7"
-clap = { version = "4.4", features = ["derive"] }
+clap = { version = "4.5", features = ["derive"] }
 prometheus-client = "0.22"
 reqwest = "0.11"
 rtorrent-xmlrpc-bindings = "1.0"
